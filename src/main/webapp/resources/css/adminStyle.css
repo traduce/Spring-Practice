@@ -1,0 +1,9 @@
+.error{
+    display: none;
+    color: red;
+    margin-left: 20px;
+}
+.error_show{   
+    color: red;
+    margin-left: 20px;
+}
