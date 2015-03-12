@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang="en">
     <head>
@@ -9,29 +7,52 @@
         <!--        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
                 <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.min.js"></script>
                 <script src="http://jqueryvalidation.org/files/dist/jquery.validate.min.js"></script>  -->
-        
+
         <script src="resources/js/jquery-1.11.1.min.js"></script>
         <script src="resources/js/jquery.validate.min.js"></script>  
+        <!--<script src="resources/js/jquery.autocomplete.min.js"></script>-->  
+        <script src="<c:url value="resources/js/jquery.autocomplete.min.js" />"></script>
 
         <script>
             $(document).ready(function () {
                 $("#fullName").hide();
                 $("#commentForm").validate();
+                    
+                //       $("#searchMessage").html('keyup() is triggered!, keyCode = '+ event.keyCode + ' which = ' + event.which);
+                
+                $("#search").autocomplete({
+                    serviceUrl:'${pageContext.request.contextPath}/search',
+                    paramName:"searchValue",
+                    delimiter:",",
+                  
+                    transformResult: function(response){ 
+                        console.log('test'+response);
+                        return {
+                            
+                            suggestions:$.map($.parseJSON(response),function(item){
+                                return {value:item.employeeName,data:item.id};
+                            }) 
+                        };
+                    }
+                });
             });
+
+
+
             $.validator.setDefaults({
                 submitHandler: function () {
-                    var name=$("#cname").val();
-                    var email=$("#cemail").val();
-                    var salary=$("#salary").val();
-                    $.post('data1/'+name+'/'+email+'/'+salary,function (data){
-                        if(data==='success'){
+                    var name = $("#cname").val();
+                    var email = $("#cemail").val();
+                    var salary = $("#salary").val();
+                    $.post('data1/' + name + '/' + email + '/' + salary, function (data) {
+                        if (data === 'success') {
                             alert('success');
                             $("#fullName").load('data1/value1');
-                             $("#fullName").show();
-                             $("#salary").val(2000);
+                            $("#fullName").show();
+                            $("#salary").val(2000);
                         }
                     })
-                    alert("submitted! "+name);
+                    alert("submitted! " + name);
 
                 }
             });
@@ -68,12 +89,15 @@
                 <div id="fullName">
                     <c:import url="/data1/value1" />
                 </div>
-                
+
                 <fieldset>
                     <legend>Please provide your name, email address (won't be published) and a comment</legend>
                     <p>
                         <label for="search">Search:</label>
-                        <input id="search" name="search" type="text" placeholder="search">
+                        <input id="search" name="search" type="text" value="" placeholder="search">
+                    </p>
+                    <p>
+                        <label>Message:<span id="searchMessage"></span></label>
                     </p>
                     <p>
                         <label for="cname">Name (required, at least 2 characters)</label>
