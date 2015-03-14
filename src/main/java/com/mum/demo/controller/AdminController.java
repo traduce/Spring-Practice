@@ -83,4 +83,14 @@ public class AdminController {
         }
         return results;
     }
+    
+    @RequestMapping(value = "/admin2",method = RequestMethod.GET)
+    public String redirectToAdmin2(){
+        return "admin2";
+    }
+    
+    @RequestMapping(value = "/admin3",method = RequestMethod.GET)
+    public String redirectToAdmin3(){
+        return "admin3";
+    }
 }

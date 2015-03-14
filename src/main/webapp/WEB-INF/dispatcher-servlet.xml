@@ -11,10 +11,8 @@
        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-<!--    <mvc:default-servlet-handler/>
-        <mvc:resources mapping="/resources/**" location="/resources/"/>-->
-        <mvc:default-servlet-handler/>
-        <mvc:resources mapping="/resources/**" location="/resources/"/>
+    <mvc:default-servlet-handler/>
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
     <mvc:annotation-driven />
     
     <context:component-scan base-package="com.mum.demo.controller" />
@@ -24,7 +22,7 @@
         <property name="suffix" value=".jsp" />
     </bean>
         
-<!--    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+    <!--    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basenames">
             <list>
                 <value>messages</value>
