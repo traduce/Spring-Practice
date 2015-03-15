@@ -40,7 +40,19 @@
                         required: true,
                         email: true
                     },
-                    agree: "required"
+                    agree: "required",
+                    subjectValidate: {
+                        required: "#subject:checked",
+                        minlength: 2
+                    },
+                    skillValidate: {
+                        required: "#skills:checked",
+                        minlength: 2
+                    }
+//                    skillValidate: {
+//                        required: "#skills:checked",
+//                        minlength: 2
+//                    }
 
                 },
                 messages: {
@@ -80,13 +92,14 @@
                 subjectInput.attr("disabled", !this.checked);
             });
 
-            $("#skills").change(function(){
-                if($("#skills").is(":checked")){
-                    console.log('checked');
+            $("#skills").change(function () {
+                if ($("#skills").is(":checked")) {
                     $("#skillTypes").removeAttr('disabled');
-                }else{
-                    console.log('unchecked');
-                    $("#skillTypes").attr('disabled','');
+
+                } else {
+                    $("#skillTypes").attr('disabled', '');
+
+
                 }
             }).change();
 
@@ -94,6 +107,10 @@
     </script>
     <style>
         #subject_list label.error {
+            display: none;
+            margin-left: 103px;
+        }
+        #skillTypes label.error{
             display: none;
             margin-left: 103px;
         }
@@ -138,14 +155,16 @@
                 <fieldset id="subject_list">
                     <legend>Select any two subject.</legend>
                     <label>
-                        Math <input type="checkbox" name="math" id="math">
+                        Math <input type="checkbox" name="subjectValidate" id="math">
                     </label>
                     <label>
-                        English <input type="checkbox" name="english" id="english">
+                        English <input type="checkbox" name="subjectValidate" id="english">
                     </label>
                     <label>
-                        Science <input type="checkbox" name="science" id="science">
+                        Science <input type="checkbox" name="subjectValidate" id="science">
                     </label>
+                    <label for="subjectValidate" class="error">Please select at least two topics you'd like to receive...</label>
+
                 </fieldset>
                 <p>
                     <label for="skills">Skills</label>
@@ -153,9 +172,11 @@
                 </p>
                 <fieldset id="skillTypes">
                     <legend>Select any two skills</legend>
-                    <label>Java <input type="checkbox" name="java" id="java"></label>
-                    <label>C# <input type="checkbox" name="csharp" id="csharp"></label>
-                    <label>Php <input type="checkbox" name="php" id="php"></label>
+                    <label>Java <input type="checkbox" name="skillValidate" id="java"></label>
+                    <label>C# <input type="checkbox" name="skillValidate" id="csharp"></label>
+                    <label>Php <input type="checkbox" name="skillValidate" id="php"></label>
+                    <label for="skillValidate" class="error">Required...</label>
+
                 </fieldset>
                 <p>
                     <input type="submit" value="submit">
