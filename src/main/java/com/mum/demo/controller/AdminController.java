@@ -93,4 +93,16 @@ public class AdminController {
     public String redirectToAdmin3(){
         return "admin3";
     }
+    
+    
+    
+    @RequestMapping(value = "/adminValue3/{patientName}",method = RequestMethod.POST)
+    public @ResponseBody String getAdmin2Data(@PathVariable("patientName") List patientName){
+        System.out.println("Get admin data "+patientName.size());
+        for(int i=0;i<patientName.size();i++){
+            System.out.println("FINAL VALUE IS "+patientName.get(i));
+        }
+        return "";
+    }
+    
 }

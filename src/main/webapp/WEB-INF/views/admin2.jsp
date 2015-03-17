@@ -103,6 +103,41 @@
                 }
             }).change();
 
+            ///Dynamic Add/Delete button
+            var i = 1;
+            $("#addButton").click(function () {
+                var newTextBox = $(document.createElement('div')).attr("id", 'patentInfo' + i);
+                newTextBox.after().html('<label> Patient Name: #' + i + ':\n\
+                </label>' + '<input type="text" name="patient' + i + '" id="patient' + i + '" value="">\n\
+                ');
+                newTextBox.appendTo("#patentDetails");
+                i++;
+            });
+
+            $("#removeButton").click(function () {
+                if (i >= 0) {
+                    i--;
+                    $("#patentInfo" + i).remove();
+                }
+            });
+            $("#showButton").click(function () {
+                var msg = '';
+                var list=[];
+                for (j = 1; j < i; j++) {
+                    //msg += "Textbox #" + j + ":" + $("#patient" + j).val();  
+                    list.push($("#patient" + j).val());
+                   
+                }
+                    alert(": " + list.length);         
+
+                console.log('Inside click--' + msg);
+
+                $.post('adminValue3/' +list, function () {
+                    console.log("success");
+                });
+            });
+
+
         });
     </script>
     <style>
@@ -113,6 +148,9 @@
         #skillTypes label.error{
             display: none;
             margin-left: 103px;
+        }
+        div{
+            padding: 8px;
         }
     </style>
     <body>
@@ -178,6 +216,21 @@
                     <label for="skillValidate" class="error">Required...</label>
 
                 </fieldset>
+
+                <p>
+                <div id="patentDetails">
+                    <div id="patentInfo">
+                        <label>Patient Name:</label>
+                        <input type="text" id="patient0">
+                    </div>
+                </div>
+
+
+                <input type="button" name="Add" id="addButton" value="Add">
+                <input type="button" name="Remove" id="removeButton" value="Remove">
+                <input type="button" name="ShowInfo" id="showButton" value="showButton">
+                </p>
+
                 <p>
                     <input type="submit" value="submit">
                 </p>

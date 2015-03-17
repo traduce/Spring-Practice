@@ -26,7 +26,7 @@
                     delimiter:",",
                   
                     transformResult: function(response){ 
-                        console.log('test'+response);
+                        console.log(response);
                         return {
                             
                             suggestions:$.map($.parseJSON(response),function(item){
@@ -51,7 +51,7 @@
                             $("#fullName").show();
                             $("#salary").val(2000);
                         }
-                    })
+                    });
                     alert("submitted! " + name);
 
                 }
